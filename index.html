@@ -1,0 +1,523 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>LA County Emergency Plans Map</title>
+<meta name="description" content="Interactive map of 648 emergency plans, hazard mitigation plans, safety elements and related documents for Los Angeles County: one node per organization, with a lookup that lists the plans covering any address.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23d4502a'/%3E%3Ccircle cx='8' cy='8' r='3' fill='%23fff'/%3E%3C/svg%3E">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<style>
+/* Leaflet 1.9.4 core styles (inlined: the page must work from a folder and inside an artifact) */
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}.leaflet-container{overflow:hidden}.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-user-drag:none}.leaflet-tile::selection{background:transparent}.leaflet-safari .leaflet-tile{image-rendering:-webkit-optimize-contrast}.leaflet-safari .leaflet-tile-container{width:1600px;height:1600px;-webkit-transform-origin:0 0}.leaflet-marker-icon,.leaflet-marker-shadow{display:block}.leaflet-container .leaflet-overlay-pane svg{max-width:none!important;max-height:none!important}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer,.leaflet-container .leaflet-tile{max-width:none!important;max-height:none!important;width:auto;padding:0}.leaflet-container img.leaflet-tile{mix-blend-mode:plus-lighter}.leaflet-container.leaflet-touch-zoom{-ms-touch-action:pan-x pan-y;touch-action:pan-x pan-y}.leaflet-container.leaflet-touch-drag{-ms-touch-action:pinch-zoom;touch-action:none;touch-action:pinch-zoom}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom{-ms-touch-action:none;touch-action:none}.leaflet-container{-webkit-tap-highlight-color:transparent}.leaflet-container a{-webkit-tap-highlight-color:rgba(51,181,229,.4)}.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}.leaflet-zoom-box{width:0;height:0;-moz-box-sizing:border-box;box-sizing:border-box;z-index:800}.leaflet-overlay-pane svg{-moz-user-select:none}.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-shadow-pane{z-index:500}.leaflet-marker-pane{z-index:600}.leaflet-tooltip-pane{z-index:650}.leaflet-popup-pane{z-index:700}.leaflet-map-pane canvas{z-index:100}.leaflet-map-pane svg{z-index:200}.leaflet-vml-shape{width:1px;height:1px}.lvml{behavior:url(#default#VML);display:inline-block;position:absolute}.leaflet-control{position:relative;z-index:800;pointer-events:visiblePainted;pointer-events:auto}.leaflet-top,.leaflet-bottom{position:absolute;z-index:1000;pointer-events:none}.leaflet-top{top:0}.leaflet-right{right:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-control{float:left;clear:both}.leaflet-right .leaflet-control{float:right}.leaflet-top .leaflet-control{margin-top:10px}.leaflet-bottom .leaflet-control{margin-bottom:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{margin-right:10px}.leaflet-fade-anim .leaflet-popup{opacity:0;-webkit-transition:opacity .2s linear;-moz-transition:opacity .2s linear;transition:opacity .2s linear}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup{opacity:1}.leaflet-zoom-animated{-webkit-transform-origin:0 0;-ms-transform-origin:0 0;transform-origin:0 0}svg.leaflet-zoom-animated{will-change:transform}.leaflet-zoom-anim .leaflet-zoom-animated{-webkit-transition:-webkit-transform .25s cubic-bezier(0,0,.25,1);-moz-transition:-moz-transform .25s cubic-bezier(0,0,.25,1);transition:transform .25s cubic-bezier(0,0,.25,1)}.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile{-webkit-transition:none;-moz-transition:none;transition:none}.leaflet-zoom-anim .leaflet-zoom-hide{visibility:hidden}.leaflet-interactive{cursor:pointer}.leaflet-grab{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive{cursor:crosshair}.leaflet-popup-pane,.leaflet-control{cursor:auto}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable{cursor:move;cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-image-layer,.leaflet-pane>svg path,.leaflet-tile-container{pointer-events:none}.leaflet-marker-icon.leaflet-interactive,.leaflet-image-layer.leaflet-interactive,.leaflet-pane>svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path{pointer-events:visiblePainted;pointer-events:auto}.leaflet-container{background:#ddd;outline-offset:1px}.leaflet-container a{color:#0078a8}.leaflet-zoom-box{border:2px dotted #38f;background:rgba(255,255,255,.5)}.leaflet-container{font-family:"Helvetica Neue",Arial,Helvetica,sans-serif;font-size:12px;font-size:.75rem;line-height:1.5}.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.65);border-radius:4px}.leaflet-bar a{background-color:#fff;border-bottom:1px solid #ccc;width:26px;height:26px;line-height:26px;display:block;text-align:center;text-decoration:none;color:black}.leaflet-bar a,.leaflet-control-layers-toggle{background-position:50% 50%;background-repeat:no-repeat;display:block}.leaflet-bar a:hover,.leaflet-bar a:focus{background-color:#f4f4f4}.leaflet-bar a:first-child{border-top-left-radius:4px;border-top-right-radius:4px}.leaflet-bar a:last-child{border-bottom-left-radius:4px;border-bottom-right-radius:4px;border-bottom:none}.leaflet-bar a.leaflet-disabled{cursor:default;background-color:#f4f4f4;color:#bbb}.leaflet-touch .leaflet-bar a{width:30px;height:30px;line-height:30px}.leaflet-touch .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}.leaflet-touch .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}.leaflet-control-zoom-in,.leaflet-control-zoom-out{font:bold 18px 'Lucida Console',Monaco,monospace;text-indent:1px}.leaflet-touch .leaflet-control-zoom-in,.leaflet-touch .leaflet-control-zoom-out{font-size:22px}.leaflet-container .leaflet-control-attribution{background:#fff;background:rgba(255,255,255,.8);margin:0}.leaflet-control-attribution,.leaflet-control-scale-line{padding:0 5px;color:#333;line-height:1.4}.leaflet-control-attribution a{text-decoration:none}.leaflet-control-attribution a:hover,.leaflet-control-attribution a:focus{text-decoration:underline}.leaflet-attribution-flag{display:inline!important;vertical-align:baseline!important;width:1em;height:.6669em}.leaflet-left .leaflet-control-scale{margin-left:5px}.leaflet-bottom .leaflet-control-scale{margin-bottom:5px}.leaflet-control-scale-line{border:2px solid #777;border-top:none;line-height:1.1;padding:2px 5px 1px;white-space:nowrap;-moz-box-sizing:border-box;box-sizing:border-box;background:rgba(255,255,255,.8);text-shadow:1px 1px #fff}.leaflet-control-scale-line:not(:first-child){border-top:2px solid #777;border-bottom:none;margin-top:-2px}.leaflet-control-scale-line:not(:first-child):not(:last-child){border-bottom:2px solid #777}.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{box-shadow:none}.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar{border:2px solid rgba(0,0,0,.2);background-clip:padding-box}.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:12px}.leaflet-popup-content{margin:13px 24px 13px 20px;line-height:1.3;font-size:13px;font-size:1.08333em;min-height:1px}.leaflet-popup-content p{margin:17px 0;margin:1.3em 0}.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;pointer-events:auto;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:white;color:#333;box-shadow:0 3px 14px rgba(0,0,0,.4)}.leaflet-container a.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:transparent}.leaflet-container a.leaflet-popup-close-button:hover,.leaflet-container a.leaflet-popup-close-button:focus{color:#585858}.leaflet-popup-scrolled{overflow:auto}.leaflet-oldie .leaflet-popup-content-wrapper{-ms-zoom:1}.leaflet-oldie .leaflet-popup-tip{width:24px;margin:0 auto;-ms-filter:"progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";filter:progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678,M12=0.70710678,M21=-0.70710678,M22=0.70710678)}.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip{border:1px solid #999}.leaflet-div-icon{background:#fff;border:1px solid #666}.leaflet-tooltip{position:absolute;padding:6px;background-color:#fff;border:1px solid #fff;border-radius:3px;color:#222;white-space:nowrap;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;pointer-events:none;box-shadow:0 1px 3px rgba(0,0,0,.4)}.leaflet-tooltip.leaflet-interactive{cursor:pointer;pointer-events:auto}.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{position:absolute;pointer-events:none;border:6px solid transparent;background:transparent;content:""}.leaflet-tooltip-bottom{margin-top:6px}.leaflet-tooltip-top{margin-top:-6px}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before{left:50%;margin-left:-6px}.leaflet-tooltip-top:before{bottom:0;margin-bottom:-12px;border-top-color:#fff}.leaflet-tooltip-bottom:before{top:0;margin-top:-12px;margin-left:-6px;border-bottom-color:#fff}.leaflet-tooltip-left{margin-left:-6px}.leaflet-tooltip-right{margin-left:6px}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{top:50%;margin-top:-6px}.leaflet-tooltip-left:before{right:0;margin-right:-12px;border-left-color:#fff}.leaflet-tooltip-right:before{left:0;margin-left:-12px;border-right-color:#fff}
+.leaflet-control-zoom-in,.leaflet-control-zoom-out{font-family:"Times New Roman",Times,serif}
+
+:root{--serif:"Times New Roman",Times,serif;--panel:#fbf9f3;--ink:#1d1c19;--muted:#5f5b50;--rule:#d9d4c4;--chip:#efece2;--accent:#b8322f;--link:#1f4e79;--shadow:0 2px 10px rgba(0,0,0,.28);--bg:#e9e4d6;--mapbg:#dfe8ee;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--panel:#23221f;--ink:#f1ede2;--muted:#b4ad9c;--rule:#4a463d;--chip:#2f2d28;--accent:#e2574f;--link:#8fb8e8;--bg:#15140f;--mapbg:#1c2228;color-scheme:dark}}
+:root[data-theme="dark"]{--panel:#23221f;--ink:#f1ede2;--muted:#b4ad9c;--rule:#4a463d;--chip:#2f2d28;--accent:#e2574f;--link:#8fb8e8;--bg:#15140f;--mapbg:#1c2228;color-scheme:dark}
+html,body{height:100%;margin:0;overscroll-behavior:none}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:14px var(--serif);padding:0}
+#map{position:fixed;inset:0;background:var(--mapbg);font-family:var(--serif)}
+#map.find{cursor:crosshair}#map.find .leaflet-interactive{cursor:crosshair}
+a{color:var(--link)}
+button,input,select{font-family:var(--serif);font-size:14px;color:var(--ink)}
+.card{background:var(--panel);color:var(--ink);border-radius:8px;box-shadow:var(--shadow)}
+#titlecard{position:absolute;z-index:800;top:calc(10px + env(safe-area-inset-top,0px));left:calc(56px + env(safe-area-inset-left,0px));max-width:min(440px,calc(100vw - 390px));padding:10px 14px;box-sizing:border-box}
+#titlecard .head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#titlecard h1{font-size:19px;margin:0;font-weight:700;text-wrap:balance;line-height:1.2}
+#tcMin{padding:0 9px;font-size:18px;line-height:24px;min-width:30px}
+#titlecard.min .rows{display:none}#titlecard.min h1{font-size:16px}
+#titlecard .upd{margin:2px 0 0;color:var(--muted);font-size:12.5px;line-height:1.3}
+#titlecard .kpis{margin:3px 0 0;font-size:14px;font-weight:700;line-height:1.3;font-variant-numeric:tabular-nums}
+#titlecard .sub{margin:0;color:var(--muted);font-size:13.5px;line-height:1.35}
+.row{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.lbl{color:var(--muted);font-size:13.5px}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.seg button{background:var(--panel);border:0;padding:4px 10px;cursor:pointer}
+.seg button+button{border-left:1px solid var(--rule)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.btn{background:var(--chip);border:1px solid var(--rule);border-radius:6px;padding:4px 10px;cursor:pointer}
+.btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (hover:hover){.btn:hover,.seg button:hover{filter:brightness(.96)}}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+#legend{position:absolute;z-index:800;bottom:calc(30px + env(safe-area-inset-bottom,0px));left:calc(10px + env(safe-area-inset-left,0px));width:320px;max-height:min(68vh,calc(100% - 80px));overflow:auto;padding:10px 12px;box-sizing:border-box;overscroll-behavior:contain}
+#legend h2{font-size:17px;margin:0;font-weight:700}
+#legend .head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#legend.min .body{display:none}
+.ltabs{display:flex;gap:4px;margin:8px 0 6px}.ltabs button{flex:1;background:var(--chip);border:1px solid var(--rule);border-radius:6px;padding:4px 6px;cursor:pointer;color:var(--ink)}.ltabs button[aria-selected="true"]{background:var(--accent);color:#fff;font-weight:700}
+.lsub{font-size:14.5px;margin:10px 0 2px;border-top:1px solid var(--rule);padding-top:6px;font-weight:700}
+#legend select,#legend input[type=text],#legend input[type=search]{width:100%;box-sizing:border-box;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:6px;padding:5px 8px;font-family:var(--serif);font-size:13.5px}
+.linkbtn{all:unset;cursor:pointer;color:var(--link);text-decoration:underline}.linkbtn:focus-visible{outline:2px solid var(--accent)}
+#legend details{border-top:1px solid var(--rule);margin-top:6px;padding-top:4px}
+#legend summary{cursor:pointer;font-weight:700;font-size:14px;list-style-position:inside}
+.tier{display:grid;grid-template-columns:18px 16px 1fr auto;gap:6px;align-items:center;padding:3px 0;font-size:14px}
+.tier.sub{padding-left:22px;font-size:13px}
+.tier .sw{width:16px;height:12px;border-radius:50%;border:1px solid rgba(0,0,0,.25)}
+.tier .n{color:var(--muted);font-variant-numeric:tabular-nums;font-size:13px}
+.note{color:var(--muted);font-size:12.5px;line-height:1.35;margin:6px 0 0}
+#hits,#findList{list-style:none;margin:4px 0 0;padding:0;max-height:200px;overflow:auto;overscroll-behavior:contain}
+#hits li button{all:unset;cursor:pointer;display:block;padding:3px 4px;font-size:14px;border-radius:4px;width:100%;box-sizing:border-box}
+#hits li button:focus-visible{background:var(--chip);outline:2px solid var(--accent);outline-offset:-1px}@media (hover:hover){#hits li button:hover{background:var(--chip)}}
+#hits small{color:var(--muted)}
+.dot{display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.45);font-family:var(--serif);font-variant-numeric:tabular-nums;cursor:pointer;box-sizing:border-box;font-size:11px;line-height:1}
+.dot.multi{border-style:dashed}
+.dot.dim{opacity:.35}
+@media (pointer:coarse){.dot{position:relative}.dot::after{content:"";position:absolute;inset:-7px}}
+.leaflet-marker-icon:focus-visible .dot{outline:3px solid #fff;outline-offset:2px}
+.pin{width:18px;height:18px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#1d1c19;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.6);box-sizing:border-box}
+.leaflet-div-icon{background:transparent;border:0}
+.leaflet-tooltip.tt{background:#fff;color:#1d1c19;border:1px solid #c9c3b2;border-radius:4px;padding:5px 9px;font-family:var(--serif);font-size:13px;line-height:1.3;box-shadow:0 2px 8px rgba(0,0,0,.3);white-space:nowrap}
+.leaflet-tooltip.tt b{font-size:14px}.tt-hint{color:#5f5b50;font-size:12px}
+.leaflet-tooltip-top.tt:before{border-top-color:#fff}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#fff;color:#1d1c19;box-shadow:0 3px 14px rgba(0,0,0,.35)}
+.leaflet-popup-content-wrapper{border-radius:6px}
+.leaflet-popup-content{margin:12px 14px;font-family:var(--serif);font-size:15px;line-height:1.4;min-width:260px;max-width:min(440px,calc(100vw - 54px));max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px);overflow:auto;overscroll-behavior:contain;box-sizing:border-box}
+.leaflet-container a.leaflet-popup-close-button{color:#5f5b50;font-family:var(--serif)}
+.pc{color:#1d1c19}.pc a{color:#1f4e79}
+.pc h3{margin:0 0 2px;font-size:1.1rem;line-height:1.2;padding-right:14px}
+.pc .meta{color:#5f5b50;font-size:.9rem;margin:0 0 8px}
+.pc .kv{display:flex;gap:8px;margin:0 0 8px}
+.pc .kv div{background:#efece2;border-radius:3px;padding:5px 8px;flex:1;min-width:0}
+.pc .kv b{display:block;font-size:1.3rem;line-height:1.1;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.pc .kv span{font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:#5f5b50}
+.pc .sec{border-top:1px solid #c9c3b2;padding-top:6px;margin:8px 0 0;font-size:.9rem}
+.pc .pill{display:inline-block;padding:1px 7px;border-radius:3px;color:#fff;font-size:.78rem;vertical-align:1px}
+.pc .src,.pc .note{margin:6px 0 0;font-size:.78rem;color:#5f5b50;line-height:1.35}
+.pc .closerow{margin:8px 0 0;display:flex;gap:6px;flex-wrap:wrap}
+.pc .btn{background:#efece2;border-color:#d9d4c4;color:#1d1c19}
+.dl{list-style:none;margin:4px 0 0;padding:0}
+.dl li{padding:5px 0;border-bottom:1px solid #efece2;font-size:.9rem;line-height:1.3}
+.dl li:last-child{border-bottom:0}
+.dl .t{display:block}
+.dl .m{color:#5f5b50;font-size:.8rem}
+.dl .m a{margin-right:8px}
+.alist{list-style:none;margin:0;padding:0}
+.alink{all:unset;cursor:pointer;display:block;padding:2px 4px;border-radius:3px;color:#1f4e79;font-size:.88rem;width:100%;box-sizing:border-box}
+.alink small{color:#5f5b50}
+.alink:focus-visible{background:#efece2}@media (hover:hover){.alink:hover{background:#efece2}}
+.fgrp{border-top:1px solid var(--rule);margin-top:6px;padding-top:4px}
+.fgrp summary{font-weight:700;cursor:pointer;font-size:14px}
+.fgrp .dl li{border-bottom-color:var(--rule);font-size:13.5px}
+.fgrp .dl .m{color:var(--muted)}
+#findOut .where{font-weight:700;margin:6px 0 2px;font-size:14.5px}
+#findOut .warn{color:var(--accent);font-size:13px;margin:4px 0 0}
+#credit{position:absolute;z-index:600;right:calc(8px + env(safe-area-inset-right,0px));bottom:calc(64px + env(safe-area-inset-bottom,0px));text-align:right;font-size:11.5px;padding:3px 7px;max-width:min(46vw,calc(100% - 360px));pointer-events:none}#credit a{pointer-events:auto}
+@media (max-height:650px){#credit{font-size:10px;max-width:46vw}}@media (max-height:520px){#credit{display:none}}
+#north{position:absolute;z-index:700;right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(100px + env(safe-area-inset-bottom,0px));width:28px;text-align:center;font-size:12px;font-weight:700;padding:3px 0}
+.leaflet-control-scale{margin-bottom:calc(6px + env(safe-area-inset-bottom,0px))!important}
+.leaflet-control-scale-line{font-family:var(--serif);background:rgba(255,255,255,.85);color:#1d2320}
+.leaflet-control-attribution{font-family:var(--serif);font-size:11px;background:rgba(255,255,255,.85)!important;color:#1d2320}
+.leaflet-control-attribution a{color:#0b57d0}
+.leaflet-control-home a{font-size:18px;line-height:30px;font-family:var(--serif)}
+#about{position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.45);display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:calc(20px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+#about .sheet{max-width:760px;width:100%;padding:18px 22px;line-height:1.45;box-sizing:border-box}
+#about h2{margin:0 0 4px;font-size:22px}#about h3{font-size:16px;margin:16px 0 4px;border-top:1px solid var(--rule);padding-top:10px}
+#about p,#about li{font-size:14.5px}#about ul,#about ol{padding-left:20px;margin:4px 0}
+#about .ref{padding-left:2em;text-indent:-2em;margin:4px 0;overflow-wrap:anywhere}
+#about table{border-collapse:collapse;font-size:13.5px;margin:4px 0}#about td,#about th{border-bottom:1px solid var(--rule);padding:3px 8px 3px 0;text-align:left;vertical-align:top}
+#about .cite{background:var(--chip);padding:8px 10px;border-radius:6px;font-size:14px;overflow-wrap:anywhere}
+#loading{position:absolute;z-index:900;left:50%;top:50%;transform:translate(-50%,-50%);padding:10px 16px;font-size:15px}
+@media (max-width:760px){
+ #titlecard{left:calc(56px + env(safe-area-inset-left,0px));right:calc(10px + env(safe-area-inset-right,0px));max-width:none;top:calc(10px + env(safe-area-inset-top,0px))}
+ #titlecard .kpis{font-size:13px}
+ #legend{left:calc(10px + env(safe-area-inset-left,0px));right:calc(10px + env(safe-area-inset-right,0px));width:auto;max-height:46vh}
+ .leaflet-popup-content{font-size:13.5px;margin:10px 12px;max-height:55vh}.pc h3{font-size:1rem}.pc .kv b{font-size:1.1rem}
+ #credit{display:none}
+}
+@media (forced-colors:active){.dot,.tier .sw,.pc .pill{forced-color-adjust:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+
+<div id="map" role="application" aria-label="Map of Los Angeles County emergency plans"></div>
+
+<section id="titlecard" class="card" aria-labelledby="ttl">
+ <div class="head"><h1 id="ttl">Los Angeles County Emergency Plans</h1><button id="tcMin" class="btn" aria-label="Minimize title card" aria-expanded="true" title="Minimize">&minus;</button></div>
+ <div class="rows">
+  <p class="upd" id="upd">Loading the document index.</p>
+  <p class="kpis" id="kpis"></p>
+  <p class="sub">One node per organization that published a plan. Larger nodes hold more documents. Click a node for its documents with official links, or use <b>Find my plans</b> to list every plan that covers an address.</p>
+  <div class="row">
+   <button class="btn primary" id="findBtn">Find my plans</button>
+   <button class="btn" id="aboutBtn">About, sources and how to cite</button>
+  </div>
+  <div class="row">
+   <span class="lbl">Basemap</span>
+   <div class="seg" role="group" aria-label="Basemap"><button data-base="street" aria-pressed="true">Street</button><button data-base="sat" aria-pressed="false">Satellite</button><button data-base="none" aria-pressed="false">None</button></div>
+   <span class="lbl">City limits</span>
+   <div class="seg" role="group" aria-label="City limits"><button data-lim="on" aria-pressed="true">On</button><button data-lim="off" aria-pressed="false">Off</button></div>
+  </div>
+ </div>
+</section>
+
+<aside id="legend" class="card" aria-labelledby="lh">
+ <div class="head"><h2 id="lh">Layers</h2><button id="lgMin" class="btn" aria-label="Minimize legend" aria-expanded="true" title="Minimize">&minus;</button></div>
+ <div class="body">
+  <div class="ltabs" role="tablist"><button role="tab" data-tab="layers" aria-selected="true">Layers</button><button role="tab" data-tab="find" aria-selected="false">Find my plans</button><button role="tab" data-tab="list" aria-selected="false">Browse</button></div>
+  <div id="tab-layers" role="tabpanel">
+   <div id="tiers"></div>
+   <p class="note">Color is the folder level of the organization's main document group. Node size grows with the square root of its document count. Dashed nodes hold several organizations at one address (click to list them). <span id="outsideNote"></span></p>
+  </div>
+  <div id="tab-find" role="tabpanel" hidden>
+   <p class="note" style="margin:0 0 6px">Type an address, click a point on the map, or pick a city. The list shows every document in this library whose jurisdiction covers that point.</p>
+   <form id="findForm" autocomplete="off"><label class="sr" for="addr">Address</label><input type="search" id="addr" placeholder="Street address, city (Los Angeles County)" enterkeyhint="search">
+   <div class="row" style="margin-top:6px"><button type="submit" class="btn primary">Search address</button><button type="button" class="btn" id="clickBtn" aria-pressed="false">Click the map</button><button type="button" class="btn" id="locBtn">Use my location</button></div></form>
+   <div class="row" style="margin-top:6px"><label class="lbl" for="citySel">or a city</label><select id="citySel"><option value="">Choose a city</option></select></div>
+   <div id="findOut"></div>
+  </div>
+  <div id="tab-list" role="tabpanel" hidden>
+   <label class="sr" for="search">Search organizations and documents</label>
+   <input type="search" id="search" placeholder="Search organizations and document titles">
+   <ul id="hits"></ul>
+   <div class="row" style="margin-top:6px"><label class="lbl" for="orgSel">Organization</label><select id="orgSel"><option value="">All organizations</option></select></div>
+   <p class="note" id="listNote"></p>
+  </div>
+ </div>
+</aside>
+
+<div id="north" class="card" aria-hidden="true">N<br>&uarr;</div>
+<div id="credit" class="card">Map by Travis Cody Smith, <span id="credDate"></span>. Boundaries: Los Angeles County eGIS. Basemap: USGS The National Map. WGS 84 / Web Mercator.</div>
+<div id="loading" class="card" role="status">Loading the map.</div>
+
+<div id="about" hidden role="dialog" aria-modal="true" aria-labelledby="abH">
+ <div class="sheet card">
+  <div class="head" style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 id="abH">About this map</h2><button class="btn" id="abClose" aria-label="Close">Close</button></div>
+  <p id="abIntro"></p>
+  <h3>How to use it</h3>
+  <ul>
+   <li><b>Nodes.</b> Each node is one organization: a city, a county department, a state or federal agency, a utility, a campus or a neighborhood group. Click it for its documents. Each document links to the official copy; when the official link is dead, an Internet Archive copy is linked too. Opened from the folder on the building Mac, each document also links to the local PDF.</li>
+   <li><b>Find my plans.</b> Type an address, click the map, or pick a city. The page finds the city or unincorporated area that contains the point (LA County city boundaries, point-in-polygon in the browser), then lists the city's plans, the City of Los Angeles annexes when inside Los Angeles, the council of governments that includes the city, Los Angeles County's plans, state and federal frameworks, and nearby neighborhood guides, campuses and airports within a few kilometers. Special districts and county-wide partners are listed for reference: whether a water or air district serves an address depends on the provider.</li>
+   <li><b>Layers.</b> Untick a level to hide its nodes. <b>Browse</b> searches organizations and document titles.</li>
+   <li><b>Links.</b> The address bar of the page does not change; use "Copy link" on a card to share a node, or the link under a lookup result to share a point.</li>
+  </ul>
+  <h3>Where the documents come from</h3>
+  <p>The library behind this map was built in October 2026 from the official websites of the organizations themselves: each city's emergency operations plan, local hazard mitigation plan and general-plan safety element, Los Angeles County's operational area plans, the State of California's emergency plan and annexes, mutual-aid agreements, federal frameworks and law, after-action reports, hazard maps and the plans of airports, utilities, campuses and neighborhoods. Research agents found the links, a download script fetched them, each file was checked to be a PDF, and a second pass read the first pages of every file and compared them with the catalogue (<span id="abVer"></span>). The map reads the same record as the workbooks and reference lists in the library folder.</p>
+  <h3>Link audit</h3>
+  <p id="abAudit"></p>
+  <table id="abAuditT"></table>
+  <h3>How the nodes were placed</h3>
+  <p>Each organization was placed at its headquarters, city hall or site by two research agents working from the organization's name and documents, with a precision tag (<i>hq</i>, <i>site</i> or <i>city</i>) and a confidence tag. <span id="abGeo"></span> Positions mark the organization that issued a document, not the area a plan covers: a county plan covers the whole county, a state plan the whole state. Documents of state and federal agencies sit at their headquarters (Sacramento, Mather, Washington, Reston), so zoom out to see them.</p>
+  <h3>Layers and colors</h3>
+  <table id="abLevels"></table>
+  <h3>Sources</h3>
+  <ol id="abSrc"></ol>
+  <h3>Tools and method</h3>
+  <p>Leaflet 1.9.4 (BSD-2-Clause), one HTML page with its data in two JavaScript files, no server. Coordinates WGS 84 (EPSG:4326), drawn in Web Mercator (EPSG:3857). City boundaries were simplified with a Douglas-Peucker pass (about 25 m tolerance) from the county's polygons. Address search uses the OpenStreetMap Nominatim service when the page is opened from a folder or a website; inside a claude.ai artifact outside requests are blocked, so click the map or pick a city there. Code and layout generated with Claude (Anthropic); data, placement and accuracy reviewed by Travis Cody Smith. Research agents (Claude) found the links and checked the files; a Claude agent audited each link by byte-range request, and links that refused scripts were checked again in a browser.</p>
+  <h3>Limitations</h3>
+  <ul>
+   <li>Node positions for about one organization in eight are marked medium confidence and may be off by a few hundred meters; the About card of each node shows its tag.</li>
+   <li>Council-of-governments membership and the Palos Verdes Peninsula grouping come from the councils' own membership lists as of 2026; special district service areas are not mapped.</li>
+   <li>The library has the documents that were public in October 2026; a city may have adopted a newer plan since. Twenty documents could not be downloaded by script and are listed as "manual" with their official link only.</li>
+   <li>Unincorporated areas are shown as one class; community names (Altadena, Topanga, Acton) come from the documents, not from a community boundary layer.</li>
+  </ul>
+  <h3>How to cite</h3>
+  <p class="cite" id="cite"></p>
+  <div class="row"><button class="btn" id="copyCite">Copy citation</button><span class="note" id="copyMsg"></span></div>
+  <p class="note">Figure note: Data from the organizations listed under Sources (2000 to 2026) and the Los Angeles County eGIS city boundary layer. Basemap USGS The National Map. Built with Leaflet; code generated with Claude and reviewed by the author. A metadata file (metadata.md) sits beside this page.</p>
+ </div>
+</div>
+
+<script src="leaflet-1.9.4.js" onerror="(function(){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';s.integrity='sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH';s.crossOrigin='anonymous';s.onload=function(){document.dispatchEvent(new Event('leafletready'))};s.onerror=function(){document.getElementById('loading').textContent='The map library did not load. Check your connection and reload.'};document.head.appendChild(s)})()"></script>
+<script src="data.js?v=1"></script>
+<script src="boundaries.js?v=1"></script>
+<script>
+(function(){
+'use strict';
+var D=window.LAEP_DATA, B=window.LAEP_BOUNDS;
+var $=function(s){return document.querySelector(s)};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+var isFile=location.protocol==='file:';
+var LA_BOUNDS=[[33.70,-118.95],[34.85,-117.60]];
+if(!D||!B){$('#loading').textContent='The data files did not load (data.js, boundaries.js). Keep them beside this page.';return}
+function start(){
+ if(!window.L){document.addEventListener('leafletready',start,{once:true});return}
+ var L=window.L;
+ var map=L.map('map',{zoomControl:false,attributionControl:true,worldCopyJump:false,maxZoom:19,minZoom:3});
+ L.control.zoom({position:'topleft'}).addTo(map);
+ L.control.scale({position:'bottomleft',imperial:true,metric:true}).addTo(map);
+ map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
+ var bases={
+  street:L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,maxNativeZoom:16,attribution:'Basemap: <a href="https://www.usgs.gov/programs/national-geospatial-program/national-map" target="_blank" rel="noopener">USGS The National Map</a>'}),
+  sat:L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryTopo/MapServer/tile/{z}/{y}/{x}',{maxZoom:16,maxNativeZoom:16,attribution:'Basemap: <a href="https://www.usgs.gov/programs/national-geospatial-program/national-map" target="_blank" rel="noopener">USGS The National Map</a> (imagery)'})
+ };
+ var baseKey='street'; bases.street.addTo(map);
+ var tileErr=0,tileOk=0;
+ bases.street.on('tileerror',function(){tileErr++;if(tileErr>=6&&!tileOk){$('#outsideNote').textContent+=' Basemap tiles are blocked in this viewer; boundaries and nodes still work. Open the page from the folder for the street map.'}});
+ bases.street.on('tileload',function(){tileOk++});
+ document.querySelectorAll('[data-base]').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('[data-base]').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');
+  if(bases[baseKey])map.removeLayer(bases[baseKey]);baseKey=b.dataset.base;if(bases[baseKey])bases[baseKey].addTo(map);
+  limits.setStyle(limitStyle());
+ })});
+ // Home control
+ var Home=L.Control.extend({onAdd:function(){var d=L.DomUtil.create('div','leaflet-bar leaflet-control leaflet-control-home');var a=L.DomUtil.create('a','',d);a.href='#';a.title='Back to Los Angeles County';a.setAttribute('aria-label','Back to Los Angeles County');a.innerHTML='&#8962;';L.DomEvent.on(a,'click',function(e){L.DomEvent.preventDefault(e);map.closePopup();map.fitBounds(LA_BOUNDS,{padding:[10,10]})});return d}});
+ new Home({position:'topleft'}).addTo(map);
+
+ // ---- boundaries
+ var cityByName={};
+ function limitStyle(f){var dark=baseKey==='sat';return function(f){var city=f.properties.kind==='City';return {color:dark?'#fff':'#5a4a3a',weight:city?1.1:0.7,opacity:dark?.8:.7,dashArray:city?null:'3 3',fillColor:city?'#d4502a':'#6b6b3a',fillOpacity:0.04}}}
+ var limits=L.geoJSON(B,{style:limitStyle(),pane:'overlayPane',onEachFeature:function(f,l){
+   var n=f.properties.name;if(f.properties.kind==='City'){(cityByName[n]=cityByName[n]||[]).push(l)}
+   l.bindTooltip(f.properties.kind==='City'?'<b>'+esc(n)+'</b><br><span class="tt-hint">City. Click for its plans.</span>':'<b>Unincorporated Los Angeles County</b><br><span class="tt-hint">Click to list the plans that cover this point.</span>',{className:'tt',sticky:true,direction:'top'});
+   l.on('mouseover',function(){l.setStyle({fillOpacity:.18})});l.on('mouseout',function(){limits.resetStyle(l)});
+   l.on('click',function(e){if(findMode){return} if(f.properties.kind==='City'){var o=orgByCity[n];if(o){openOrg(o,e.latlng)}else{lookupAt(e.latlng.lat,e.latlng.lng)}}else{lookupAt(e.latlng.lat,e.latlng.lng)}});
+ }}).addTo(map);
+ document.querySelectorAll('[data-lim]').forEach(function(b){b.addEventListener('click',function(){
+  document.querySelectorAll('[data-lim]').forEach(function(x){x.setAttribute('aria-pressed','false')});b.setAttribute('aria-pressed','true');
+  if(b.dataset.lim==='on'){limits.addTo(map)}else{map.removeLayer(limits)}
+ })});
+
+ // ---- data indexes
+ var docs=D.docs, orgs=D.orgs, orgById={}, orgByCity={}, levelByKey={};
+ D.levels.forEach(function(l){levelByKey[l.key]=l});
+ orgs.forEach(function(o){orgById[o.id]=o;if(o.city&&o.levels.indexOf('cities')>=0)orgByCity[o.city]=o});
+ var laCity=orgById['Los_Angeles']||null;
+ var tops=[];D.levels.forEach(function(l){if(tops.indexOf(l.top)<0)tops.push(l.top)});
+ var docCountByLevel={},orgCountByLevel={};
+ docs.forEach(function(d){docCountByLevel[d.level]=(docCountByLevel[d.level]||0)+1});
+ orgs.forEach(function(o){orgCountByLevel[o.level]=(orgCountByLevel[o.level]||0)+1});
+ var levelOn={};D.levels.forEach(function(l){levelOn[l.key]=true});
+
+ // header
+ var c=D.counts;
+ $('#upd').textContent='Updated '+fmtDate(D.built)+' from the library index (results.json). Map by Travis Cody Smith.';
+ $('#credDate').textContent=fmtDate(D.built);
+ $('#kpis').textContent=c.docs+' documents · '+c.pdfs+' PDFs on file · '+c.orgs+' organizations · '+c.cities+' of 88 cities';
+ var outside=orgs.filter(function(o){return o.lat<LA_BOUNDS[0][0]||o.lat>LA_BOUNDS[1][0]||o.lon<LA_BOUNDS[0][1]||o.lon>LA_BOUNDS[1][1]}).length;
+ $('#outsideNote').textContent=outside+' organizations (state and federal agencies, neighbor counties) sit outside the county view; zoom out to see them.';
+
+ // ---- tiers legend
+ var tiersEl=$('#tiers');
+ tops.forEach(function(top){
+  var lv=D.levels.filter(function(l){return l.top===top});
+  var nd=lv.reduce(function(s,l){return s+(docCountByLevel[l.key]||0)},0);
+  var det=document.createElement('details');det.open=(top==='06_Cities'||top==='04_LA_County');
+  var sum=document.createElement('summary');
+  sum.innerHTML='<span class="tier" style="display:inline-grid;grid-template-columns:18px 16px auto auto;width:calc(100% - 20px)"><input type="checkbox" checked data-top="'+esc(top)+'" aria-label="Show '+esc(D.topLabels[top])+'"><span class="sw" style="background:'+D.topColors[top]+'"></span><span>'+esc(D.topLabels[top])+'</span><span class="n">'+nd+' docs</span></span>';
+  det.appendChild(sum);
+  lv.forEach(function(l){
+   var row=document.createElement('label');row.className='tier sub';
+   row.innerHTML='<input type="checkbox" checked data-level="'+esc(l.key)+'"><span class="sw" style="background:'+l.color+';opacity:.75"></span><span>'+esc(l.sub===D.topLabels[top]?l.label:l.sub.replace(/_/g,' '))+'</span><span class="n">'+(orgCountByLevel[l.key]||0)+' nodes · '+(docCountByLevel[l.key]||0)+' docs</span>';
+   det.appendChild(row);
+  });
+  tiersEl.appendChild(det);
+ });
+ tiersEl.addEventListener('click',function(e){if(e.target.matches('input[data-top]')){e.stopPropagation()}});
+ tiersEl.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.dataset.top){tiersEl.querySelectorAll('input[data-level]').forEach(function(i){var l=levelByKey[i.dataset.level];if(l.top===t.dataset.top){i.checked=t.checked;levelOn[l.key]=t.checked}})}
+  else if(t.dataset.level){levelOn[t.dataset.level]=t.checked;var top=levelByKey[t.dataset.level].top;var all=D.levels.filter(function(l){return l.top===top}).every(function(l){return levelOn[l.key]});var tb=tiersEl.querySelector('input[data-top="'+top+'"]');tb.checked=all;tb.indeterminate=!all&&D.levels.some(function(l){return l.top===top&&levelOn[l.key]})}
+  drawNodes();
+ });
+
+ // ---- nodes: group organizations by rounded position
+ var groups={};
+ orgs.forEach(function(o){var k=o.lat.toFixed(3)+','+o.lon.toFixed(3);(groups[k]=groups[k]||[]).push(o)});
+ var nodeLayer=L.layerGroup().addTo(map);
+ var markerByOrg={};
+ function radius(n){return Math.round(9+3.2*Math.sqrt(n))}
+ function drawNodes(){
+  nodeLayer.clearLayers();markerByOrg={};
+  Object.keys(groups).forEach(function(k){
+   var os=groups[k].filter(function(o){return levelOn[o.level]});if(!os.length)return;
+   var n=os.reduce(function(s,o){return s+o.docs.length},0);
+   var byTop={};os.forEach(function(o){byTop[o.top]=(byTop[o.top]||0)+o.docs.length});
+   var top=Object.keys(byTop).sort(function(a,b){return byTop[b]-byTop[a]})[0];
+   var r=radius(n),multi=os.length>1;
+   var html='<div class="dot'+(multi?' multi':'')+'" style="width:'+2*r+'px;height:'+2*r+'px;background:'+D.topColors[top]+'" aria-hidden="true">'+(r>=13?n:'')+'</div>';
+   var m=L.marker([os[0].lat,os[0].lon],{icon:L.divIcon({html:html,className:'',iconSize:[2*r,2*r],iconAnchor:[r,r]}),keyboard:true,title:multi?os.length+' organizations, '+n+' documents':os[0].name+', '+n+' documents',zIndexOffset:multi?50:0});
+   var tip=multi?'<b>'+os.length+' organizations here</b><br><span class="tt-hint">'+esc(os[0].place||'')+' · '+n+' documents. Click to list them.</span>':'<b>'+esc(os[0].name)+'</b><br><span class="tt-hint">'+esc(levelByKey[os[0].level].label)+' · '+n+' document'+(n===1?'':'s')+'. Click for the list.</span>';
+   m.bindTooltip(tip,{className:'tt',direction:'top',offset:[0,-r]});
+   m.on('click',function(){if(findMode){lookupAt(os[0].lat,os[0].lon);return} if(multi){openPlace(os,m.getLatLng())}else{openOrg(os[0],m.getLatLng())}});
+   nodeLayer.addLayer(m);os.forEach(function(o){markerByOrg[o.id]=m});
+  });
+ }
+ drawNodes();
+
+ // ---- cards
+ var popup=L.popup({maxWidth:460,autoPanPaddingTopLeft:[20,70],autoPanPaddingBottomRight:[20,20],className:'orgpop'});
+ function pill(level){var l=levelByKey[level];return '<span class="pill" style="background:'+l.color+'">'+esc(l.label)+'</span>'}
+ function docRow(d){
+  var o=orgById[d.org];
+  var links=[];
+  if(d.url){links.push('<a href="'+esc(d.url)+'" target="_blank" rel="noopener">Official link</a>')}
+  if(d.archive){links.push('<a href="'+esc(d.archive)+'" target="_blank" rel="noopener">Archive copy</a>')}
+  if(isFile&&(d.status==='ok'||d.status==='copied')){links.push('<a href="../../'+esc(d.path).split('/').map(encodeURIComponent).join('/')+'" target="_blank">Local PDF</a>')}
+  var st='';
+  if(d.status==='manual'||d.status==='failed'){st=' · <span style="color:#b8322f">not downloaded (manual)</span>'}
+  else if(d.verdict==='partial'){st=' · partial: '+esc(d.issue||'draft, excerpt or packet')}
+  else if(d.verdict==='unreadable'){st=' · scanned, not checked'}
+  var yr=d.vyear&&d.vyear!=='n.d.'?d.vyear:(d.year!=='n.d.'?d.year:'n.d.');
+  var audit='';if(/^OK/.test(d.audit)){audit=' · link OK'}else if(/^BLOCKED/.test(d.audit)){audit=d.browser.indexOf('PDF')===0?' · link OK in a browser (site refuses scripts)':' · site refuses scripts'+(d.browser?'; browser: '+esc(d.browser):'')}else if(d.audit){audit=' · link '+esc(d.audit.toLowerCase().replace('_',' '))}
+  return '<li><span class="t"><b>'+esc(d.typeName)+'</b> ('+esc(yr)+'). '+esc(d.title)+'</span><span class="m">'+(o&&d.author&&d.author!==o.name?esc(d.author)+' · ':'')+links.join(' ')+audit+st+'</span></li>';
+ }
+ function orgCard(o){
+  var ds=o.docs.map(function(i){return docs[i]});
+  var pdfs=ds.filter(function(d){return d.status==='ok'||d.status==='copied'}).length;
+  var ok=ds.filter(function(d){return /^OK/.test(d.audit)||(/^BLOCKED/.test(d.audit)&&d.browser.indexOf('PDF')===0)}).length;
+  var checked=ds.filter(function(d){return d.verdict==='match'}).length;
+  var h='<div class="pc"><h3>'+esc(o.name)+'</h3><p class="meta">'+o.levels.map(pill).join(' ')+' · '+esc(o.place||'')+(o.precision?' · placed at '+esc(o.precision)+' ('+esc(o.confidence)+' confidence)':'')+'</p>';
+  h+='<div class="kv"><div><b>'+ds.length+'</b><span>documents</span></div><div><b>'+pdfs+'</b><span>PDFs on file</span></div><div><b>'+ok+'</b><span>links OK</span></div><div><b>'+checked+'</b><span>content verified</span></div></div>';
+  h+='<div class="sec"><ul class="dl">'+ds.sort(function(a,b){return (b.year>a.year)-(b.year<a.year)}).map(docRow).join('')+'</ul></div>';
+  if(o.city&&o.levels.indexOf('cities')>=0){h+='<p class="note">Also covered by county, regional, state and federal plans: use <b>Find my plans</b> for the full list at an address in '+esc(o.city)+'.</p>'}
+  h+='<div class="closerow"><button class="btn" data-copy="org_'+esc(o.id)+'">Copy link</button><button class="btn" data-zoom="'+esc(o.id)+'">Zoom here</button>'+(o.city?'<button class="btn" data-find="'+esc(o.city)+'">All plans for this city</button>':'')+'</div></div>';
+  return h;
+ }
+ function openOrg(o,latlng){
+  var ll=latlng||L.latLng(o.lat,o.lon);
+  if(o.city&&cityByName[o.city]&&!latlng){var b=L.featureGroup(cityByName[o.city]).getBounds();if(!map.getBounds().contains(b))map.fitBounds(b,{padding:[40,40],maxZoom:13})}
+  popup.setLatLng(ll).setContent(orgCard(o)).openOn(map);
+  wireCard(o);
+ }
+ function openPlace(os,latlng){
+  var h='<div class="pc"><h3>'+os.length+' organizations at this address</h3><p class="meta">'+esc(os[0].place||'')+'</p><ul class="alist">'+os.sort(function(a,b){return b.docs.length-a.docs.length}).map(function(o){return '<li><button class="alink" data-org="'+esc(o.id)+'">'+esc(o.name)+' <small>'+o.docs.length+' doc'+(o.docs.length===1?'':'s')+' · '+esc(levelByKey[o.level].label)+'</small></button></li>'}).join('')+'</ul></div>';
+  popup.setLatLng(latlng).setContent(h).openOn(map);
+  popup.getElement().querySelectorAll('[data-org]').forEach(function(b){b.addEventListener('click',function(){openOrg(orgById[b.dataset.org],latlng)})});
+ }
+ function wireCard(o){
+  var el=popup.getElement();if(!el)return;
+  el.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copyText(shareLink(b.dataset.copy),b)})});
+  el.querySelectorAll('[data-zoom]').forEach(function(b){b.addEventListener('click',function(){map.setView([o.lat,o.lon],Math.max(map.getZoom(),14))})});
+  el.querySelectorAll('[data-find]').forEach(function(b){b.addEventListener('click',function(){lookupCity(b.dataset.find)})});
+ }
+ function shareLink(tok){return location.href.split('#')[0]+'#'+tok}
+ function copyText(t,btn){var done=function(ok){if(btn){var old=btn.textContent;btn.textContent=ok?'Copied':'Copy failed, select the text';setTimeout(function(){btn.textContent=old},1600)}};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true)},function(){fallbackCopy(t,done)})}else{fallbackCopy(t,done)}}
+ function fallbackCopy(t,done){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy')}catch(e){}ta.remove();done(ok)}
+
+ // ---- cards and tabs
+ var tabs=document.querySelectorAll('.ltabs [role=tab]');
+ function showTab(name){tabs.forEach(function(t){var on=t.dataset.tab===name;t.setAttribute('aria-selected',on?'true':'false');$('#tab-'+t.dataset.tab).hidden=!on});$('#lh').textContent=name==='layers'?'Layers':name==='find'?'Find my plans':'Browse';$('#legend').classList.remove('min');$('#lgMin').setAttribute('aria-expanded','true')}
+ tabs.forEach(function(t){t.addEventListener('click',function(){showTab(t.dataset.tab)})});
+ $('#findBtn').addEventListener('click',function(){showTab('find');$('#addr').focus()});
+ $('#tcMin').addEventListener('click',function(){var tc=$('#titlecard');tc.classList.toggle('min');var min=tc.classList.contains('min');this.textContent=min?'+':'−';this.setAttribute('aria-expanded',min?'false':'true');this.setAttribute('aria-label',min?'Expand title card':'Minimize title card')});
+ $('#lgMin').addEventListener('click',function(){var lg=$('#legend');lg.classList.toggle('min');var min=lg.classList.contains('min');this.textContent=min?'+':'−';this.setAttribute('aria-expanded',min?'false':'true')});
+ if(window.innerWidth<760){$('#titlecard').classList.add('min');$('#tcMin').textContent='+';$('#tcMin').setAttribute('aria-expanded','false')}
+
+ // ---- browse tab
+ var orgSel=$('#orgSel');
+ orgs.slice().sort(function(a,b){return a.name.localeCompare(b.name)}).forEach(function(o){var op=document.createElement('option');op.value=o.id;op.textContent=o.name+' ('+o.docs.length+')';orgSel.appendChild(op)});
+ orgSel.addEventListener('change',function(){var o=orgById[this.value];if(o){map.closePopup();map.setView([o.lat,o.lon],Math.max(map.getZoom(),11));openOrg(o)}});
+ $('#listNote').textContent=orgs.length+' organizations, '+docs.length+' documents.';
+ var searchEl=$('#search'),hits=$('#hits');
+ searchEl.addEventListener('input',function(){
+  var q=this.value.trim().toLowerCase();hits.innerHTML='';if(q.length<2)return;
+  var res=[];
+  orgs.forEach(function(o){if(o.name.toLowerCase().indexOf(q)>=0)res.push({o:o,t:o.name,s:o.docs.length+' docs · '+levelByKey[o.level].label})});
+  docs.forEach(function(d){if(res.length<40&&(d.title.toLowerCase().indexOf(q)>=0||d.typeName.toLowerCase().indexOf(q)>=0)){res.push({o:orgById[d.org],t:d.title,s:orgById[d.org].name+' · '+d.typeName+' '+d.year})}});
+  res.slice(0,40).forEach(function(r){var li=document.createElement('li');var b=document.createElement('button');b.innerHTML=esc(r.t)+' <small>'+esc(r.s)+'</small>';b.addEventListener('click',function(){map.setView([r.o.lat,r.o.lon],Math.max(map.getZoom(),11));openOrg(r.o)});li.appendChild(b);hits.appendChild(li)});
+  if(!res.length){hits.innerHTML='<li><small>Nothing matches.</small></li>'}
+ });
+
+ // ---- find my plans
+ var findMode=false,pin=null;
+ var citySel=$('#citySel');
+ Object.keys(cityByName).sort().forEach(function(n){var op=document.createElement('option');op.value=n;op.textContent=n;citySel.appendChild(op)});
+ citySel.addEventListener('change',function(){if(this.value)lookupCity(this.value)});
+ $('#clickBtn').addEventListener('click',function(){findMode=!findMode;this.setAttribute('aria-pressed',findMode?'true':'false');this.textContent=findMode?'Click the map now (on)':'Click the map';$('#map').classList.toggle('find',findMode)});
+ map.on('click',function(e){if(findMode){lookupAt(e.latlng.lat,e.latlng.lng)}});
+ $('#locBtn').addEventListener('click',function(){var out=$('#findOut');if(!navigator.geolocation){out.innerHTML='<p class="warn">This browser gives no location. Type an address or click the map.</p>';return}out.innerHTML='<p class="note">Asking for your location.</p>';navigator.geolocation.getCurrentPosition(function(p){lookupAt(p.coords.latitude,p.coords.longitude,'Your location')},function(){out.innerHTML='<p class="warn">Location was not available here (inside an artifact it is blocked). Type an address or click the map.</p>'},{timeout:12000})});
+ $('#findForm').addEventListener('submit',function(e){
+  e.preventDefault();var q=$('#addr').value.trim();if(!q)return;var out=$('#findOut');out.innerHTML='<p class="note">Looking up the address with OpenStreetMap Nominatim.</p>';
+  var url='https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&countrycodes=us&viewbox=-118.95,34.85,-117.60,33.70&bounded=0&q='+encodeURIComponent(q);
+  var ctl=('AbortController' in window)?new AbortController():null;if(ctl)setTimeout(function(){ctl.abort()},12000);
+  fetch(url,{signal:ctl?ctl.signal:undefined,headers:{'Accept':'application/json'}}).then(function(r){return r.json()}).then(function(j){
+   if(!j||!j.length){out.innerHTML='<p class="warn">No match for that address. Add the city name, or click the map.</p>';return}
+   lookupAt(+j[0].lat,+j[0].lon,j[0].display_name);
+  }).catch(function(){out.innerHTML='<p class="warn">The address service could not be reached from here. Inside a claude.ai artifact outside requests are blocked: click <b>Click the map</b> and then the map, or pick a city below.</p>'});
+ });
+ function pip(pt,ring){var x=pt[0],y=pt[1],ins=false;for(var i=0,j=ring.length-1;i<ring.length;j=i++){var xi=ring[i][0],yi=ring[i][1],xj=ring[j][0],yj=ring[j][1];if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))ins=!ins}return ins}
+ function inGeom(pt,g){var polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;for(var p=0;p<polys.length;p++){if(pip(pt,polys[p][0])){var hole=false;for(var r=1;r<polys[p].length;r++){if(pip(pt,polys[p][r])){hole=true;break}}if(!hole)return true}}return false}
+ function whereIs(lat,lon){var pt=[lon,lat];for(var i=0;i<B.features.length;i++){var f=B.features[i];if(inGeom(pt,f.geometry))return f.properties}return null}
+ function km(a,b,c,d){var R=6371,dl=(c-a)*Math.PI/180,dn=(d-b)*Math.PI/180,x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dn/2)*Math.sin(dn/2);return 2*R*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
+ function lookupCity(name){var ls=cityByName[name];if(!ls)return;var b=L.featureGroup(ls).getBounds();var ctr=b.getCenter();
+  // find a point inside the city: try the centre, then the first ring's first vertex nudged inward
+  var p=whereIs(ctr.lat,ctr.lng);if(!p||p.name!==name){var g=ls[0].feature.geometry;var ring=g.type==='Polygon'?g.coordinates[0]:g.coordinates[0][0];var sx=0,sy=0;ring.forEach(function(q){sx+=q[0];sy+=q[1]});ctr=L.latLng(sy/ring.length,sx/ring.length);p=whereIs(ctr.lat,ctr.lng);if(!p||p.name!==name){ctr=L.latLng(ring[0][1],ring[0][0])}}
+  map.fitBounds(b,{padding:[40,40],maxZoom:13});lookupAt(ctr.lat,ctr.lng,name,true)}
+ function lookupAt(lat,lon,label,noZoom){
+  showTab('find');var out=$('#findOut');
+  if(pin)map.removeLayer(pin);
+  pin=L.marker([lat,lon],{icon:L.divIcon({html:'<div class="pin"></div>',className:'',iconSize:[18,18],iconAnchor:[6,18]}),interactive:false,zIndexOffset:1000}).addTo(map);
+  if(!noZoom&&!map.getBounds().contains([lat,lon]))map.setView([lat,lon],Math.max(map.getZoom(),11));
+  var where=whereIs(lat,lon);
+  var groups=[];
+  function add(title,ds,note){ds=ds.filter(function(d,i,a){return a.indexOf(d)===i});if(ds.length)groups.push({t:title,ds:ds,note:note})}
+  function byLevel(ks){return docs.filter(function(d){return ks.indexOf(d.level)>=0})}
+  function near(level,maxKm){return orgs.filter(function(o){return o.levels.indexOf(level)>=0&&km(lat,lon,o.lat,o.lon)<=maxKm}).sort(function(a,b){return km(lat,lon,a.lat,a.lon)-km(lat,lon,b.lat,b.lon)}).reduce(function(acc,o){return acc.concat(o.docs.map(function(i){return docs[i]}).filter(function(d){return d.level===level}))},[])}
+  var head='';
+  if(!where){
+   head='<p class="where">'+esc(label||lat.toFixed(4)+', '+lon.toFixed(4))+'</p><p class="warn">This point is outside the Los Angeles County boundary layer; the library covers Los Angeles County. Neighbor-county plans within 80 km are listed below.</p>';
+   var nb=orgs.filter(function(o){return o.levels.indexOf('neighbors')>=0&&km(lat,lon,o.lat,o.lon)<=80});
+   add('Neighbor county and regional plans nearby',nb.reduce(function(a,o){return a.concat(o.docs.map(function(i){return docs[i]}))},[]));
+  }else if(where.kind==='City'){
+   var o=orgByCity[where.name];
+   head='<p class="where">'+esc(label&&label!==where.name?label:'')+(label&&label!==where.name?'<br>':'')+'City of '+esc(where.name)+'</p>';
+   if(o){add('City of '+where.name+': its own plans',o.docs.map(function(i){return docs[i]}))}else{head+='<p class="warn">No plan for '+esc(where.name)+' is in the library yet (see the manual list in 00_Start_Here).</p>'}
+   if(where.name==='Los Angeles'){add('City of Los Angeles: emergency plan annexes and department plans',byLevel(['la_city']))}
+   var rg=[];Object.keys(D.regional).forEach(function(k){var cs=D.regional[k];if(cs[0]==='*'||cs.indexOf(where.name)>=0){var ro=orgById[k];if(ro)rg=rg.concat(ro.docs.map(function(i){return docs[i]}))}});
+   add('Councils of governments and regional groups that include '+where.name,rg,'Membership from the councils’ own lists, 2026.');
+  }else{
+   head='<p class="where">'+esc(label||'')+(label?'<br>':'')+'Unincorporated Los Angeles County</p><p class="note">County departments are the local government here (Sheriff, County Fire, Public Works, Regional Planning).</p>';
+   var un=orgById['LA_County_Unincorporated'];if(un)add('Unincorporated area plans',un.docs.map(function(i){return docs[i]}));
+   add('Councils of governments and regional groups (county-wide)',Object.keys(D.regional).filter(function(k){return D.regional[k][0]==='*'}).reduce(function(a,k){var ro=orgById[k];return ro?a.concat(ro.docs.map(function(i){return docs[i]})):a},[]));
+  }
+  if(where){
+   add('Neighborhood and community guides within 8 km',near('neighborhoods',8).filter(function(d){return d.org!=='LA_County_Unincorporated'}));
+   add('Los Angeles County: operational area, county departments, governance',byLevel(['county','governance']));
+   add('Fire and wildfire plans (county, CAL FIRE units, forests, utilities)',byLevel(['fire']));
+   add('After-action reports for Los Angeles County events',byLevel(['aars']));
+   add('Airports within 12 km',near('airports',12));
+   add('Campuses and school districts within 8 km',near('education',8));
+   add('Special districts and utilities (check which serves this address)',byLevel(['districts']),'Water, flood control and air districts serve parts of the county; the library does not map their service areas.');
+   add('County-wide health, transit, military and partner plans',byLevel(['sectors','partners']));
+   add('State of California: emergency plan, annexes, mutual aid, hazard science',byLevel(['state','mutual_aid','hazards']));
+   add('Federal frameworks, law and agencies',byLevel(['frameworks','federal']));
+  }
+  var total=groups.reduce(function(s,g){return s+g.ds.length},0);
+  var h=head+'<p class="note">'+total+' documents apply here or nearby. <button class="linkbtn" id="shareAt">Copy a link to this point</button></p>';
+  groups.forEach(function(g,i){h+='<details class="fgrp"'+(i<2?' open':'')+'><summary>'+esc(g.t)+' <span class="n" style="color:var(--muted);font-weight:400">('+g.ds.length+')</span></summary>'+(g.note?'<p class="note">'+esc(g.note)+'</p>':'')+'<ul class="dl">'+g.ds.map(docRow).join('')+'</ul></details>'});
+  out.innerHTML=h;
+  var sb=$('#shareAt');if(sb)sb.addEventListener('click',function(){copyText(shareLink('at_'+lat.toFixed(5)+'_'+lon.toFixed(5)),sb)});
+  $('#legend').scrollTop=0;
+ }
+
+ // ---- about
+ $('#aboutBtn').addEventListener('click',function(){openAbout()});
+ $('#abClose').addEventListener('click',function(){$('#about').hidden=true;$('#aboutBtn').focus()});
+ $('#about').addEventListener('click',function(e){if(e.target===this){this.hidden=true}});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('#about').hidden){$('#about').hidden=true}});
+ function openAbout(){
+  $('#about').hidden=false;$('#abClose').focus();
+  $('#abIntro').textContent='This map shows where the '+c.docs+' documents of the Los Angeles County emergency plans library come from: '+c.orgs+' organizations, from the 88 cities and the county to the State of California and federal agencies. Built '+fmtDate(D.built)+' by Travis Cody Smith.';
+  var v=c.verdicts;$('#abVer').textContent=(v.match||0)+' files matched their catalogue entry exactly, '+(v.partial||0)+' were a draft, excerpt or packet of the right document, '+(v.unreadable||0)+' were scanned images, '+(v['not checked']||0)+' were not downloaded';
+  var a=c.audit,okn=(a.OK||0)+(c.browserOK||0);
+  $('#abAudit').textContent='Every official link was requested again on '+fmtDate(c.auditDate||D.built)+' with a byte-range GET (the first bytes of the file, which also catches sites that answer 404 to HEAD requests); the '+Object.keys(a).filter(function(k){return /^BLOCKED/.test(k)}).reduce(function(s,k){return s+a[k]},0)+' links whose sites refuse scripts were opened again from a signed-in Chrome session, and '+c.browserOK+' of them served the PDF there. In all '+okn+' of '+c.docs+' links answered with the file. "Viewer" means the link opens a document viewer or web page rather than a PDF; "dead" links are kept with their Internet Archive copy where one exists. The same audit columns are in the Excel workbooks of the library.';
+  var order=['OK','OK (browser)','BLOCKED','BLOCKED?','VIEWER','PORTAL','NOT_PDF','DEAD','ERR_500','not audited'];
+  $('#abAuditT').innerHTML='<tr><th>Audit result</th><th>Links</th></tr>'+order.filter(function(k){return a[k]}).map(function(k){return '<tr><td>'+esc(k)+'</td><td>'+a[k]+'</td></tr>'}).join('');
+  var pc={};orgs.forEach(function(o){pc[o.confidence]=(pc[o.confidence]||0)+1});
+  $('#abGeo').textContent=(pc.high||0)+' organizations are placed with high confidence and '+(pc.medium||0)+' with medium confidence; '+(pc.low||0)+' low.';
+  $('#abLevels').innerHTML='<tr><th>Color</th><th>Folder</th><th>Levels</th><th>Nodes</th><th>Docs</th></tr>'+tops.map(function(t){var lv=D.levels.filter(function(l){return l.top===t});return '<tr><td><span class="tier" style="display:inline-block"><span class="sw" style="display:inline-block;background:'+D.topColors[t]+'"></span></span></td><td>'+esc(t.replace(/_/g,' '))+'</td><td>'+lv.map(function(l){return esc(l.label)}).join(', ')+'</td><td>'+lv.reduce(function(s,l){return s+(orgCountByLevel[l.key]||0)},0)+'</td><td>'+lv.reduce(function(s,l){return s+(docCountByLevel[l.key]||0)},0)+'</td></tr>'}).join('');
+  var src=[
+   'Smith, T. C. (2026). <i>Los Angeles County emergency plans library</i> [Document collection and index, results.json, '+c.docs+' records]. Built from the official websites of the '+c.orgs+' issuing organizations; see the APA reference lists in 00_Start_Here for every document’s own citation.',
+   'County of Los Angeles, Internal Services Department, Enterprise GIS. (2026). <i>City boundaries</i> [Feature layer 19, Political Boundaries map service, Los Angeles County Registrar-Recorder data]. <a href="https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/Political_Boundaries/MapServer/19" target="_blank" rel="noopener">https://public.gis.lacounty.gov/public/rest/services/LACounty_Dynamic/Political_Boundaries/MapServer/19</a> (retrieved October 30, 2026; simplified for display).',
+   'U.S. Geological Survey. (n.d.). <i>The National Map: USGS Topo and USGS Imagery Topo base map tile services</i>. <a href="https://basemap.nationalmap.gov/arcgis/rest/services" target="_blank" rel="noopener">https://basemap.nationalmap.gov/arcgis/rest/services</a>',
+   'OpenStreetMap contributors. (2026). <i>Nominatim geocoding service</i> [Address search, used only when the page can reach the internet]. <a href="https://nominatim.openstreetmap.org/" target="_blank" rel="noopener">https://nominatim.openstreetmap.org/</a> Data © OpenStreetMap contributors, ODbL.',
+   'Agafonkin, V. (2023). <i>Leaflet</i> (Version 1.9.4) [JavaScript library]. <a href="https://leafletjs.com/" target="_blank" rel="noopener">https://leafletjs.com/</a>',
+   'Organization positions: placed by two Claude research agents (Anthropic, October 2026) at each organization’s headquarters, city hall or site from the organization’s name and documents, with precision and confidence tags; stored in _tools/map_geocodes.json.'
+  ];
+  $('#abSrc').innerHTML=src.map(function(s){return '<li class="ref">'+s+'</li>'}).join('');
+  var cite='Smith, T. C. (2026). Los Angeles County emergency plans: Who published what, and which plans cover an address [Interactive map]. '+(isFile?'Los Angeles County Emergency Plans library, 00_Start_Here/Map/index.html':location.href.split('#')[0]);
+  $('#cite').textContent=cite;
+  $('#copyCite').onclick=function(){copyText(cite,this)};
+ }
+ function fmtDate(iso){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(iso||'');if(!m)return iso||'';var mo=['January','February','March','April','May','June','July','August','September','October','November','December'];return mo[+m[2]-1]+' '+(+m[3])+', '+m[1]}
+
+ // ---- start view and deep links
+ map.fitBounds(LA_BOUNDS,{padding:[10,10]});
+ $('#loading').hidden=true;
+ var hash=(location.hash||'').slice(1);
+ if(/^org_/.test(hash)){var o=orgById[hash.slice(4)];if(o){map.setView([o.lat,o.lon],11);setTimeout(function(){openOrg(o)},300)}}
+ else if(/^at_/.test(hash)){var p=hash.slice(3).split('_');if(p.length===2&&isFinite(+p[0])&&isFinite(+p[1])){map.setView([+p[0],+p[1]],12);setTimeout(function(){lookupAt(+p[0],+p[1])},300)}}
+ window.LAEP_MAP={map:map,lookupAt:lookupAt,openOrg:openOrg,orgs:orgs,docs:docs,whereIs:whereIs};
+}
+start();
+})();
+</script>
