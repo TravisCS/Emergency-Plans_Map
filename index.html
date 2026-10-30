@@ -44,9 +44,15 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 #legend h2{font-size:17px;margin:0;font-weight:700}
 #legend .head{display:flex;justify-content:space-between;align-items:center;gap:8px}
 #legend.min .body{display:none}
+#findbox{position:absolute;z-index:800;top:calc(10px + env(safe-area-inset-top,0px));right:calc(10px + env(safe-area-inset-right,0px));width:340px;max-height:calc(100% - 190px);overflow:auto;padding:10px 12px;box-sizing:border-box;overscroll-behavior:contain}
+#findbox h2{font-size:17px;margin:0;font-weight:700}
+#findbox .head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+#findbox .body{margin-top:8px}
+#findbox.min .body{display:none}
+#findbox.min{width:auto}
 .ltabs{display:flex;gap:4px;margin:8px 0 6px}.ltabs button{flex:1;background:var(--chip);border:1px solid var(--rule);border-radius:6px;padding:4px 6px;cursor:pointer;color:var(--ink)}.ltabs button[aria-selected="true"]{background:var(--accent);color:#fff;font-weight:700}
 .lsub{font-size:14.5px;margin:10px 0 2px;border-top:1px solid var(--rule);padding-top:6px;font-weight:700}
-#legend select,#legend input[type=text],#legend input[type=search]{width:100%;box-sizing:border-box;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:6px;padding:5px 8px;font-family:var(--serif);font-size:13.5px}
+#legend select,#legend input[type=text],#legend input[type=search],#findbox select,#findbox input[type=search]{width:100%;box-sizing:border-box;background:var(--panel);color:var(--ink);border:1px solid var(--rule);border-radius:6px;padding:5px 8px;font-family:var(--serif);font-size:13.5px}
 .linkbtn{all:unset;cursor:pointer;color:var(--link);text-decoration:underline}.linkbtn:focus-visible{outline:2px solid var(--accent)}
 #legend details{border-top:1px solid var(--rule);margin-top:6px;padding-top:4px}
 #legend summary{cursor:pointer;font-weight:700;font-size:14px;list-style-position:inside}
@@ -122,6 +128,8 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 #about .cite{background:var(--chip);padding:8px 10px;border-radius:6px;font-size:14px;overflow-wrap:anywhere}
 #loading{position:absolute;z-index:900;left:50%;top:50%;transform:translate(-50%,-50%);padding:10px 16px;font-size:15px}
 @media (max-width:760px){
+  #findbox{top:calc(90px + env(safe-area-inset-top,0px));left:calc(56px + env(safe-area-inset-left,0px));width:auto;max-height:55vh}
+  #findbox.min{left:auto}
  #titlecard{left:calc(56px + env(safe-area-inset-left,0px));right:calc(10px + env(safe-area-inset-right,0px));max-width:none;top:calc(10px + env(safe-area-inset-top,0px))}
  #titlecard .kpis{font-size:13px}
  #legend{left:calc(10px + env(safe-area-inset-left,0px));right:calc(10px + env(safe-area-inset-right,0px));width:auto;max-height:46vh}
@@ -165,17 +173,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 <aside id="legend" class="card" aria-labelledby="lh">
  <div class="head"><h2 id="lh">Layers</h2><button id="lgMin" class="btn" aria-label="Minimize legend" aria-expanded="true" title="Minimize">&minus;</button></div>
  <div class="body">
-  <div class="ltabs" role="tablist"><button role="tab" data-tab="layers" aria-selected="true">Layers</button><button role="tab" data-tab="find" aria-selected="false">Find my plans</button><button role="tab" data-tab="list" aria-selected="false">Browse</button></div>
+  <div class="ltabs" role="tablist"><button role="tab" data-tab="layers" aria-selected="true">Layers</button><button role="tab" data-tab="list" aria-selected="false">Browse</button></div>
   <div id="tab-layers" role="tabpanel">
    <div id="tiers"></div>
    <p class="note">Color is the folder level of the organization's main document group. Node size grows with the square root of its document count. Dashed nodes hold several organizations at one address (click to list them). <span id="outsideNote"></span></p>
-  </div>
-  <div id="tab-find" role="tabpanel" hidden>
-   <p class="note" style="margin:0 0 6px">Type an address, click a point on the map, or pick a city. The list shows every document in this library whose jurisdiction covers that point.</p>
-   <form id="findForm" autocomplete="off"><label class="sr" for="addr">Address</label><input type="search" id="addr" placeholder="Street address, city (Los Angeles County)" enterkeyhint="search">
-   <div class="row" style="margin-top:6px"><button type="submit" class="btn primary">Search address</button><button type="button" class="btn" id="clickBtn" aria-pressed="false">Click the map</button><button type="button" class="btn" id="locBtn">Use my location</button></div></form>
-   <div class="row" style="margin-top:6px"><label class="lbl" for="citySel">or a city</label><select id="citySel"><option value="">Choose a city</option></select></div>
-   <div id="findOut"></div>
   </div>
   <div id="tab-list" role="tabpanel" hidden>
    <label class="sr" for="search">Search organizations and documents</label>
@@ -185,6 +186,17 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
    <p class="note" id="listNote"></p>
   </div>
  </div>
+</aside>
+
+<aside id="findbox" class="card" aria-labelledby="fh">
+ <div class="head"><h2 id="fh">Find my plans</h2><button id="fbMin" class="btn" aria-label="Minimize Find my plans" aria-expanded="true" title="Minimize">&minus;</button></div>
+ <div class="body">
+   <p class="note" style="margin:0 0 6px">Type an address, click a point on the map, or pick a city. The list shows every document in this library whose jurisdiction covers that point.</p>
+   <form id="findForm" autocomplete="off"><label class="sr" for="addr">Address</label><input type="search" id="addr" placeholder="Street address, city (Los Angeles County)" enterkeyhint="search">
+   <div class="row" style="margin-top:6px"><button type="submit" class="btn primary">Search address</button><button type="button" class="btn" id="clickBtn" aria-pressed="false">Click the map</button><button type="button" class="btn" id="locBtn">Use my location</button></div></form>
+   <div class="row" style="margin-top:6px"><label class="lbl" for="citySel">or a city</label><select id="citySel"><option value="">Choose a city</option></select></div>
+   <div id="findOut"></div>
+  </div>
 </aside>
 
 <div id="north" class="card" aria-hidden="true">N<br>&uarr;</div>
@@ -436,9 +448,11 @@ function start(){
 
  // ---- cards and tabs
  var tabs=document.querySelectorAll('.ltabs [role=tab]');
- function showTab(name){tabs.forEach(function(t){var on=t.dataset.tab===name;t.setAttribute('aria-selected',on?'true':'false');$('#tab-'+t.dataset.tab).hidden=!on});$('#lh').textContent=name==='layers'?'Layers':name==='find'?'Find my plans':'Browse';$('#legend').classList.remove('min');$('#lgMin').setAttribute('aria-expanded','true')}
+ function openFind(){var fb=$('#findbox');fb.classList.remove('min');$('#fbMin').textContent='\u2212';$('#fbMin').setAttribute('aria-expanded','true')}
+ function showTab(name){if(name==='find'){openFind();return}tabs.forEach(function(t){var on=t.dataset.tab===name;t.setAttribute('aria-selected',on?'true':'false');$('#tab-'+t.dataset.tab).hidden=!on});$('#lh').textContent=name==='layers'?'Layers':name==='find'?'Find my plans':'Browse';$('#legend').classList.remove('min');$('#lgMin').setAttribute('aria-expanded','true')}
  tabs.forEach(function(t){t.addEventListener('click',function(){showTab(t.dataset.tab)})});
  $('#findBtn').addEventListener('click',function(){showTab('find');$('#addr').focus()});
+ $('#fbMin').addEventListener('click',function(){var fb=$('#findbox');fb.classList.toggle('min');var min=fb.classList.contains('min');this.textContent=min?'+':'\u2212';this.setAttribute('aria-expanded',min?'false':'true');this.setAttribute('aria-label',min?'Expand Find my plans':'Minimize Find my plans')});
  $('#tcMin').addEventListener('click',function(){var tc=$('#titlecard');tc.classList.toggle('min');var min=tc.classList.contains('min');this.textContent=min?'+':'−';this.setAttribute('aria-expanded',min?'false':'true');this.setAttribute('aria-label',min?'Expand title card':'Minimize title card')});
  $('#lgMin').addEventListener('click',function(){var lg=$('#legend');lg.classList.toggle('min');var min=lg.classList.contains('min');this.textContent=min?'+':'−';this.setAttribute('aria-expanded',min?'false':'true')});
  var VIEWS={nation:[[24.4,-125.0],[49.4,-66.9]],ca:[[32.5,-124.4],[42.0,-114.1]],socal:[[32.5,-120.7],[35.8,-114.6]],la:LA_BOUNDS};
@@ -450,7 +464,7 @@ function start(){
  var btnMove=true;setTimeout(function(){btnMove=false},800);
  map.on('movestart',function(){if(!btnMove)setViewBtn('')});
  document.querySelectorAll('[data-grp]').forEach(function(b){b.addEventListener('click',function(){grouping=b.dataset.grp==='on';document.querySelectorAll('[data-grp]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});drawNodes()})});
- if(window.innerWidth<760){$('#legend').classList.add('min');$('#lgMin').textContent='+';$('#lgMin').setAttribute('aria-expanded','false')}
+ if(window.innerWidth<760){$('#findbox').classList.add('min');$('#fbMin').textContent='+';$('#fbMin').setAttribute('aria-expanded','false');$('#legend').classList.add('min');$('#lgMin').textContent='+';$('#lgMin').setAttribute('aria-expanded','false')}
  if(window.innerWidth<760){$('#titlecard').classList.add('min');$('#tcMin').textContent='+';$('#tcMin').setAttribute('aria-expanded','false')}
 
  // ---- browse tab
@@ -537,7 +551,7 @@ function start(){
   groups.forEach(function(g,i){h+='<details class="fgrp"'+(i<2?' open':'')+'><summary>'+esc(g.t)+' <span class="n" style="color:var(--muted);font-weight:400">('+g.ds.length+')</span></summary>'+(g.note?'<p class="note">'+esc(g.note)+'</p>':'')+'<ul class="dl">'+g.ds.map(docRow).join('')+'</ul></details>'});
   out.innerHTML=h;
   var sb=$('#shareAt');if(sb)sb.addEventListener('click',function(){copyText(shareLink('at_'+lat.toFixed(5)+'_'+lon.toFixed(5)),sb)});
-  $('#legend').scrollTop=0;
+  $('#findbox').scrollTop=0;
  }
 
  // ---- about
