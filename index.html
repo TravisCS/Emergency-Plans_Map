@@ -25,7 +25,8 @@ button,input,select{font-family:var(--serif);font-size:14px;color:var(--ink)}
 #titlecard .head{display:flex;justify-content:space-between;align-items:center;gap:10px}
 #titlecard h1{font-size:19px;margin:0;font-weight:700;text-wrap:balance;line-height:1.2}
 #tcMin{padding:0 9px;font-size:18px;line-height:24px;min-width:30px}
-#titlecard.min .rows{display:none}#titlecard.min h1{font-size:16px}
+#titlecard.min .rows{display:none}
+.tagmin{display:none;font-size:11.5px;font-weight:700;color:var(--accent)}#titlecard.min .tagmin{display:block}#titlecard.min h1{font-size:16px}
 #titlecard .upd{margin:2px 0 0;color:var(--muted);font-size:12.5px;line-height:1.3}
 #titlecard .kpis{margin:3px 0 0;font-size:14px;font-weight:700;line-height:1.3;font-variant-numeric:tabular-nums}
 #titlecard .sub{margin:0;color:var(--muted);font-size:13.5px;line-height:1.35}
@@ -60,6 +61,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 #hits small{color:var(--muted)}
 .dot{display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.45);font-family:var(--serif);font-variant-numeric:tabular-nums;cursor:pointer;box-sizing:border-box;font-size:11px;line-height:1}
 .dot.multi{border-style:dashed}
+.anote{display:block;font-style:italic;color:var(--muted)}
+.notice{border-left:3px solid var(--accent);padding:3px 0 3px 8px;color:var(--ink)}
+.dot.cluster{border-width:3px;font-size:12px}.dot.cluster span{background:rgba(29,28,25,.78);border-radius:9px;padding:1px 5px;min-width:12px;text-align:center}
+.tt .sw{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:middle}
 .dot.dim{opacity:.35}
 @media (pointer:coarse){.dot{position:relative}.dot::after{content:"";position:absolute;inset:-7px}}
 .leaflet-marker-icon:focus-visible .dot{outline:3px solid #fff;outline-offset:2px}
@@ -130,20 +135,29 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 <div id="map" role="application" aria-label="Map of Los Angeles County emergency plans"></div>
 
 <section id="titlecard" class="card" aria-labelledby="ttl">
- <div class="head"><h1 id="ttl">Los Angeles County Emergency Plans</h1><button id="tcMin" class="btn" aria-label="Minimize title card" aria-expanded="true" title="Minimize">&minus;</button></div>
+ <div class="head"><div><h1 id="ttl">Los Angeles County Emergency Plans</h1><span class="tagmin">Not for official use</span></div><button id="tcMin" class="btn" aria-label="Minimize title card" aria-expanded="true" title="Minimize">&minus;</button></div>
  <div class="rows">
   <p class="upd" id="upd">Loading the document index.</p>
   <p class="kpis" id="kpis"></p>
   <p class="sub">One node per organization that published a plan. Larger nodes hold more documents. Click a node for its documents with official links, or use <b>Find my plans</b> to list every plan that covers an address.</p>
+  <p class="note notice"><b>Not for official use.</b> Independent map, not affiliated with or endorsed by any agency shown. In an emergency, call 911 and follow your local officials.</p>
   <div class="row">
    <button class="btn primary" id="findBtn">Find my plans</button>
    <button class="btn" id="aboutBtn">About, sources and how to cite</button>
+  </div>
+  <div class="row">
+   <span class="lbl">View</span>
+   <div class="seg" role="group" aria-label="Zoom to"><button data-view="nation" aria-pressed="false">Nation</button><button data-view="ca" aria-pressed="false">California</button><button data-view="socal" aria-pressed="false">SoCal</button><button data-view="la" aria-pressed="true">LA County</button></div>
   </div>
   <div class="row">
    <span class="lbl">Basemap</span>
    <div class="seg" role="group" aria-label="Basemap"><button data-base="street" aria-pressed="true">Street</button><button data-base="sat" aria-pressed="false">Satellite</button><button data-base="none" aria-pressed="false">None</button></div>
    <span class="lbl">City limits</span>
    <div class="seg" role="group" aria-label="City limits"><button data-lim="on" aria-pressed="true">On</button><button data-lim="off" aria-pressed="false">Off</button></div>
+  </div>
+  <div class="row">
+   <span class="lbl">Group nearby dots</span>
+   <div class="seg" role="group" aria-label="Group nearby dots"><button data-grp="on" aria-pressed="true">On</button><button data-grp="off" aria-pressed="false">Off</button></div>
   </div>
  </div>
 </section>
@@ -174,13 +188,14 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 </aside>
 
 <div id="north" class="card" aria-hidden="true">N<br>&uarr;</div>
-<div id="credit" class="card">Map by Travis Cody Smith, <span id="credDate"></span>. Boundaries: Los Angeles County eGIS. Basemap: USGS The National Map. WGS 84 / Web Mercator.</div>
+<div id="credit" class="card">Map by Travis Cody Smith, <span id="credDate"></span>. Boundaries: Los Angeles County eGIS. Basemap: USGS The National Map. WGS 84 / Web Mercator. Independent; not for official use.</div>
 <div id="loading" class="card" role="status">Loading the map.</div>
 
 <div id="about" hidden role="dialog" aria-modal="true" aria-labelledby="abH">
  <div class="sheet card">
   <div class="head" style="display:flex;justify-content:space-between;align-items:center;gap:10px"><h2 id="abH">About this map</h2><button class="btn" id="abClose" aria-label="Close">Close</button></div>
   <p id="abIntro"></p>
+  <p class="note notice" style="font-size:14px"><b>Independent map, not for official use.</b> Not affiliated with or endorsed by Los Angeles County, the City of Los Angeles, the California Governor's Office of Emergency Services (Cal OES), the Federal Emergency Management Agency (FEMA) or any other agency shown. It points to their public documents, which may have changed since this map was built; for official decisions and current plans, use each agency's own website. In an emergency, call 911 and follow instructions from local officials.</p>
   <h3>How to use it</h3>
   <ul>
    <li><b>Nodes.</b> Each node is one organization: a city, a county department, a state or federal agency, a utility, a campus or a neighborhood group. Click it for its documents. Each document links to the official copy; when the official link is dead, an Internet Archive copy is linked too. Opened from the folder on the building Mac, each document also links to the local PDF.</li>
@@ -216,7 +231,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 </div>
 
 <script src="leaflet-1.9.4.js" onerror="(function(){var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';s.integrity='sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH';s.crossOrigin='anonymous';s.onload=function(){document.dispatchEvent(new Event('leafletready'))};s.onerror=function(){document.getElementById('loading').textContent='The map library did not load. Check your connection and reload.'};document.head.appendChild(s)})()"></script>
-<script src="data.js?v=1"></script>
+<script src="data.js?v=2"></script>
 <script src="boundaries.js?v=1"></script>
 <script>
 (function(){
@@ -314,22 +329,58 @@ function start(){
  var nodeLayer=L.layerGroup().addTo(map);
  var markerByOrg={};
  function radius(n){return Math.round(9+3.2*Math.sqrt(n))}
+ var grouping=true;
+ function pie(byTop){var tot=0,ks=Object.keys(byTop);ks.forEach(function(k){tot+=byTop[k]});ks.sort(function(a,b){return byTop[b]-byTop[a]});
+  if(ks.length===1)return D.topColors[ks[0]];var a=0,parts=[];ks.forEach(function(k){var b=a+360*byTop[k]/tot;parts.push(D.topColors[k]+' '+a.toFixed(1)+'deg '+b.toFixed(1)+'deg');a=b});return 'conic-gradient('+parts.join(',')+')'}
  function drawNodes(){
+  if(!map._loaded)return;
   nodeLayer.clearLayers();markerByOrg={};
+  var items=[];
   Object.keys(groups).forEach(function(k){
    var os=groups[k].filter(function(o){return levelOn[o.level]});if(!os.length)return;
    var n=os.reduce(function(s,o){return s+o.docs.length},0);
    var byTop={};os.forEach(function(o){byTop[o.top]=(byTop[o.top]||0)+o.docs.length});
+   var ll=L.latLng(os[0].lat,os[0].lon);
+   items.push({os:os,n:n,byTop:byTop,ll:ll,pt:map.latLngToLayerPoint(ll)});
+  });
+  // merge dots that would overlap on screen (biggest first); off when zoomed in close
+  var clusters=[];
+  if(grouping&&map.getZoom()<15){
+   items.sort(function(a,b){return b.n-a.n});
+   items.forEach(function(it){
+    var hit=null;for(var i=0;i<clusters.length;i++){var c=clusters[i];var dx=c.pt.x-it.pt.x,dy=c.pt.y-it.pt.y;var lim=Math.max(28,0.8*(c.r+radius(it.n)));if(dx*dx+dy*dy<lim*lim){hit=c;break}}
+    if(hit){hit.items.push(it);hit.n+=it.n;Object.keys(it.byTop).forEach(function(t){hit.byTop[t]=(hit.byTop[t]||0)+it.byTop[t]});hit.r=Math.min(30,radius(hit.n))}
+    else clusters.push({items:[it],pt:it.pt,n:it.n,byTop:Object.assign({},it.byTop),r:Math.min(30,radius(it.n))});
+   });
+  } else items.forEach(function(it){clusters.push({items:[it]})});
+  clusters.forEach(function(c){
+   if(c.items.length===1){drawOne(c.items[0]);return}
+   var os=[];c.items.forEach(function(it){os=os.concat(it.os)});
+   var r=c.r,n=c.n,ll=c.items[0].ll;
+   var html='<div class="dot cluster" style="width:'+2*r+'px;height:'+2*r+'px;background:'+pie(c.byTop)+'" aria-hidden="true"><span>'+os.length+'</span></div>';
+   var m=L.marker(ll,{icon:L.divIcon({html:html,className:'',iconSize:[2*r,2*r],iconAnchor:[r,r]}),keyboard:true,title:os.length+' organizations grouped here, '+n+' documents',zIndexOffset:100});
+   var mix=Object.keys(c.byTop).sort(function(a,b){return c.byTop[b]-c.byTop[a]}).map(function(t){return '<span class="sw" style="background:'+D.topColors[t]+'"></span>'+esc(D.topLabels[t]||t)+' '+c.byTop[t]}).join('<br>');
+   m.bindTooltip('<b>'+os.length+' organizations nearby</b> · '+n+' documents<br><span class="tt-hint">'+mix+'<br>Click to zoom in and split them apart.</span>',{className:'tt',direction:'top',offset:[0,-r]});
+   m.on('click',function(){if(findMode){lookupAt(ll.lat,ll.lng);return}
+    var bb=L.latLngBounds(c.items.map(function(it){return it.ll}));
+    var z=Math.min(map.getBoundsZoom(bb.pad(0.3)),15);
+    if(z<=map.getZoom())z=map.getZoom()+2;
+    map.setView(bb.getCenter(),Math.min(z,16));});
+   nodeLayer.addLayer(m);os.forEach(function(o){markerByOrg[o.id]=m});
+  });
+ }
+ function drawOne(it){
+   var os=it.os,n=it.n,byTop=it.byTop;
    var top=Object.keys(byTop).sort(function(a,b){return byTop[b]-byTop[a]})[0];
    var r=radius(n),multi=os.length>1;
    var html='<div class="dot'+(multi?' multi':'')+'" style="width:'+2*r+'px;height:'+2*r+'px;background:'+D.topColors[top]+'" aria-hidden="true">'+(r>=13?n:'')+'</div>';
-   var m=L.marker([os[0].lat,os[0].lon],{icon:L.divIcon({html:html,className:'',iconSize:[2*r,2*r],iconAnchor:[r,r]}),keyboard:true,title:multi?os.length+' organizations, '+n+' documents':os[0].name+', '+n+' documents',zIndexOffset:multi?50:0});
+   var m=L.marker(it.ll,{icon:L.divIcon({html:html,className:'',iconSize:[2*r,2*r],iconAnchor:[r,r]}),keyboard:true,title:multi?os.length+' organizations, '+n+' documents':os[0].name+', '+n+' documents',zIndexOffset:multi?50:0});
    var tip=multi?'<b>'+os.length+' organizations here</b><br><span class="tt-hint">'+esc(os[0].place||'')+' · '+n+' documents. Click to list them.</span>':'<b>'+esc(os[0].name)+'</b><br><span class="tt-hint">'+esc(levelByKey[os[0].level].label)+' · '+n+' document'+(n===1?'':'s')+'. Click for the list.</span>';
    m.bindTooltip(tip,{className:'tt',direction:'top',offset:[0,-r]});
    m.on('click',function(){if(findMode){lookupAt(os[0].lat,os[0].lon);return} if(multi){openPlace(os,m.getLatLng())}else{openOrg(os[0],m.getLatLng())}});
    nodeLayer.addLayer(m);os.forEach(function(o){markerByOrg[o.id]=m});
-  });
  }
+ map.on('zoomend',drawNodes);map.whenReady(drawNodes);
  drawNodes();
 
  // ---- cards
@@ -347,14 +398,14 @@ function start(){
   else if(d.verdict==='unreadable'){st=' · scanned, not checked'}
   var yr=d.vyear&&d.vyear!=='n.d.'?d.vyear:(d.year!=='n.d.'?d.year:'n.d.');
   var audit='';if(/^OK/.test(d.audit)){audit=' · link OK'}else if(/^BLOCKED/.test(d.audit)){audit=d.browser.indexOf('PDF')===0?' · link OK in a browser (site refuses scripts)':' · site refuses scripts'+(d.browser?'; browser: '+esc(d.browser):'')}else if(d.audit){audit=' · link '+esc(d.audit.toLowerCase().replace('_',' '))}
-  return '<li><span class="t"><b>'+esc(d.typeName)+'</b> ('+esc(yr)+'). '+esc(d.title)+'</span><span class="m">'+(o&&d.author&&d.author!==o.name?esc(d.author)+' · ':'')+links.join(' ')+audit+st+'</span></li>';
+  return '<li><span class="t"><b>'+esc(d.typeName)+'</b> ('+esc(yr)+'). '+esc(d.title)+'</span><span class="m">'+(o&&d.author&&d.author!==o.name?esc(d.author)+' · ':'')+links.join(' ')+audit+st+'</span>'+(d.auditNote?'<span class="m anote">Audit: '+esc(d.auditNote)+'</span>':'')+'</li>';
  }
  function orgCard(o){
   var ds=o.docs.map(function(i){return docs[i]});
   var pdfs=ds.filter(function(d){return d.status==='ok'||d.status==='copied'}).length;
   var ok=ds.filter(function(d){return /^OK/.test(d.audit)||(/^BLOCKED/.test(d.audit)&&d.browser.indexOf('PDF')===0)}).length;
   var checked=ds.filter(function(d){return d.verdict==='match'}).length;
-  var h='<div class="pc"><h3>'+esc(o.name)+'</h3><p class="meta">'+o.levels.map(pill).join(' ')+' · '+esc(o.place||'')+(o.precision?' · placed at '+esc(o.precision)+' ('+esc(o.confidence)+' confidence)':'')+'</p>';
+  var h='<div class="pc"><h3>'+esc(o.name)+'</h3><p class="meta">'+o.levels.map(pill).join(' ')+' · '+esc(o.place||'')+(o.precision?' · placed at '+esc(o.precision)+' ('+esc(o.confidence)+' confidence)':'')+'</p>'+(o.auditNote?'<p class="meta anote">'+esc(o.auditNote)+'</p>':'');
   h+='<div class="kv"><div><b>'+ds.length+'</b><span>documents</span></div><div><b>'+pdfs+'</b><span>PDFs on file</span></div><div><b>'+ok+'</b><span>links OK</span></div><div><b>'+checked+'</b><span>content verified</span></div></div>';
   h+='<div class="sec"><ul class="dl">'+ds.sort(function(a,b){return (b.year>a.year)-(b.year<a.year)}).map(docRow).join('')+'</ul></div>';
   if(o.city&&o.levels.indexOf('cities')>=0){h+='<p class="note">Also covered by county, regional, state and federal plans: use <b>Find my plans</b> for the full list at an address in '+esc(o.city)+'.</p>'}
@@ -390,6 +441,16 @@ function start(){
  $('#findBtn').addEventListener('click',function(){showTab('find');$('#addr').focus()});
  $('#tcMin').addEventListener('click',function(){var tc=$('#titlecard');tc.classList.toggle('min');var min=tc.classList.contains('min');this.textContent=min?'+':'−';this.setAttribute('aria-expanded',min?'false':'true');this.setAttribute('aria-label',min?'Expand title card':'Minimize title card')});
  $('#lgMin').addEventListener('click',function(){var lg=$('#legend');lg.classList.toggle('min');var min=lg.classList.contains('min');this.textContent=min?'+':'−';this.setAttribute('aria-expanded',min?'false':'true')});
+ var VIEWS={nation:[[24.4,-125.0],[49.4,-66.9]],ca:[[32.5,-124.4],[42.0,-114.1]],socal:[[32.5,-120.7],[35.8,-114.6]],la:LA_BOUNDS};
+ function setViewBtn(k){document.querySelectorAll('[data-view]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===k?'true':'false')})}
+ document.querySelectorAll('[data-view]').forEach(function(b){b.addEventListener('click',function(){map.closePopup();btnMove=true;map.fitBounds(VIEWS[b.dataset.view],{padding:[10,10],maxZoom:12});setViewBtn(b.dataset.view);setTimeout(function(){btnMove=false},600)})});
+ function fitLegend(){var tc=$('#titlecard').getBoundingClientRect(),lg=$('#legend'),lr=lg.getBoundingClientRect();
+  if(tc.left<lr.right&&lr.left<tc.right){lg.style.maxHeight=Math.max(140,window.innerHeight-tc.bottom-12-30)+'px'}else{lg.style.maxHeight=''}}
+ window.addEventListener('resize',fitLegend);$('#tcMin').addEventListener('click',function(){setTimeout(fitLegend,0)});setTimeout(fitLegend,0);
+ var btnMove=true;setTimeout(function(){btnMove=false},800);
+ map.on('movestart',function(){if(!btnMove)setViewBtn('')});
+ document.querySelectorAll('[data-grp]').forEach(function(b){b.addEventListener('click',function(){grouping=b.dataset.grp==='on';document.querySelectorAll('[data-grp]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});drawNodes()})});
+ if(window.innerWidth<760){$('#legend').classList.add('min');$('#lgMin').textContent='+';$('#lgMin').setAttribute('aria-expanded','false')}
  if(window.innerWidth<760){$('#titlecard').classList.add('min');$('#tcMin').textContent='+';$('#tcMin').setAttribute('aria-expanded','false')}
 
  // ---- browse tab
@@ -511,7 +572,7 @@ function start(){
  function fmtDate(iso){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(iso||'');if(!m)return iso||'';var mo=['January','February','March','April','May','June','July','August','September','October','November','December'];return mo[+m[2]-1]+' '+(+m[3])+', '+m[1]}
 
  // ---- start view and deep links
- map.fitBounds(LA_BOUNDS,{padding:[10,10]});
+ map.fitBounds(LA_BOUNDS,{padding:[10,10],maxZoom:12});
  $('#loading').hidden=true;
  var hash=(location.hash||'').slice(1);
  if(/^org_/.test(hash)){var o=orgById[hash.slice(4)];if(o){map.setView([o.lat,o.lon],11);setTimeout(function(){openOrg(o)},300)}}

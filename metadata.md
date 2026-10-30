@@ -2,7 +2,7 @@
 
 **Title.** Los Angeles County emergency plans: who published what, and which plans cover an address.
 
-**Abstract.** An interactive web map of the Los Angeles County emergency plans library: one node for each of the 505 organizations that issued one or more of the library's 648 documents (emergency operations plans, hazard mitigation plans, safety elements, annexes, after-action reports, hazard maps, mutual-aid agreements, frameworks and law), with each document's official link, Internet Archive copy where the official link is dead, link-audit result and content-check result. A lookup lists every document in the library whose jurisdiction covers a chosen address or map point.
+**Abstract.** An interactive web map of the Los Angeles County emergency plans library: one node for each of the 501 organizations that issued one or more of the library's 648 documents (emergency operations plans, hazard mitigation plans, safety elements, annexes, after-action reports, hazard maps, mutual-aid agreements, frameworks and law), with each document's official link, Internet Archive copy where the official link is dead, link-audit result and content-check result. A lookup lists every document in the library whose jurisdiction covers a chosen address or map point.
 
 **Purpose.** To let a reader see at a glance which jurisdictions in the county have plans on file, open any plan from its publisher's own site, and find out which plans apply to a given address.
 
@@ -25,12 +25,13 @@
 
 ## Processing steps (lineage)
 
-1. `_tools/build_map_data.py` reads `results.json` and `map_geocodes.json`, derives the organization from each file name (the prefix before the type code and year), attaches every document to its organization, and writes `data.js` and `data.json` (counts, levels, colors, regional membership table, 505 organizations, 648 documents).
+1. `_tools/build_map_data.py` reads `results.json` and `map_geocodes.json`, derives the organization from each file name (the prefix before the type code and year), attaches every document to its organization, and writes `data.js` and `data.json` (counts, levels, colors, regional membership table, 501 organizations, 648 documents).
 2. `_tools/simplify_boundaries.py` reads the county GeoJSON and writes `boundaries.js` and `boundaries.json`: a Douglas-Peucker pass with a 0.00025 degree tolerance (about 25 meters), rings under five points dropped, coordinates rounded to five decimals (13.3 MB to 0.38 MB, 224 of 345 pieces kept; the dropped pieces are slivers smaller than the tolerance).
 3. The page groups organizations that share a position rounded to three decimals (about 100 m) into one dashed node that lists them.
 4. The lookup does point-in-polygon (even-odd ray casting, holes honored) against the boundary layer in the browser, then assembles the groups described under "Find my plans" in the page's About dialog. Council-of-governments membership is a table in `build_map_data.py` (Las Virgenes-Malibu COG, San Gabriel Valley COG, South Bay Cities COG, Palos Verdes Peninsula cities, Cal OES Region I and MARAC for every city), taken from the councils' membership lists in 2026.
 5. Link audit: `_tools/audit.py` requests the first bytes of every official link (byte-range GET) and records OK, BLOCKED, VIEWER, PORTAL, NOT_PDF, DEAD or an error code; links whose sites refuse scripts were opened again in a signed-in Chrome session and the result stored as `audit_browser`. The map shows both.
 6. Content check: the first pages of every downloaded PDF were read and compared with the catalogue entry (`verdict`: match, partial, unreadable); the printed title, author and year are what the map shows.
+7. Node audit (2026-10-30): a script checked every point against the city boundaries, then eight Claude reviewer agents (Sonnet) checked each organization's location against its real office (OpenStreetMap Nominatim and official pages) and each document's ownership, year and title. Every proposed new address was geocoded again as a second check. 152 fixes were proposed and the author answered each one; the accepted ones moved 164 points, reassigned 9 documents (adding EPA Region 9, the California Air Resources Board and National VOAD, and removing 7 organizations whose only document belonged to someone else), and corrected or annotated 69 other documents. Document fixes live in `_tools/map_fixes.json` and change only the map; the library files and workbooks keep their original names. Every question, its evidence and its answer: https://traviscs.github.io/Emergency-Plans_Map-150-Question-Audit/
 
 ## AI use
 
@@ -46,6 +47,8 @@ Research agents (Claude, Anthropic) found the document links and checked the fil
 - Local-PDF links work only when the page is opened from the library folder on the Mac that built it.
 
 ## Use constraints and attribution
+
+**Not for official use.** This is an independent map, not affiliated with or endorsed by Los Angeles County, the City of Los Angeles, Cal OES, FEMA or any other agency shown. Linked documents may have changed since the build date; use each agency's own website for official decisions and current plans. In an emergency, call 911 and follow local officials.
 
 The page and data files may be shared. Keep the attribution on the map: "Map by Travis Cody Smith. Boundaries: Los Angeles County eGIS. Basemap: USGS The National Map." Address search results are (c) OpenStreetMap contributors (ODbL). The documents linked belong to their publishers.
 
